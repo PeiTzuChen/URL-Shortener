@@ -3,11 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/main.css" rel="stylesheet">
   <title>Document</title>
 </head>
 <body>
   
-<p>測試成功</p>
+
+<h1>URL Shortener</h1>
+<div class="link-image"><img src="linkimage.png" alt=""> </div>
+
+<form action="/shortlink" method="get">
+  <div class="input-group">
+    <input class="input" type="text" name="link" placeholder="Input URL here">
+    
+    <div class="button">
+      <button  type="submit">Shorten</button>
+    </div>
+  </div>
+
+</form>
+
 
 </body>
 </html>
