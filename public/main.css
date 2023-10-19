@@ -44,6 +44,10 @@ border-style: solid;
 
 }
 
+button:hover {
+  background-color: yellow;
+}
+
 .err-message {
 /* box model */
 width: 240px;
