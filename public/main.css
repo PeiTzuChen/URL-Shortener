@@ -43,3 +43,17 @@ color: rgba(44, 137, 224, 0.7);
 border-style: solid;
 
 }
+
+.err-message {
+/* box model */
+width: 240px;
+height: 30px;
+padding-top: 10px;
+margin: 10px auto;
+/* font & color */
+border: 5px solid rgba(165, 42, 42, 0.947);
+text-align: center;
+color: brown;
+font-weight: 700;
+
+}

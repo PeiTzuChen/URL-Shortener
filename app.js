@@ -18,17 +18,23 @@ app.get('/',(req,res) => {
 res.render('index')
 })
 
-
+//讀取本地JSON檔（同步方式）
 let data = JSON.parse(fs.readFileSync('data.json', 'utf8'))
 
 
 //收到資料
 app.post('/',(req,res) => {
-const originURL = req.body
-console.log('data',data)
+const originURL = req.body.link
+console.log('originURL',originURL)
 
+if (!originURL.startsWith('http')) {
+console.log('hi')
+  res.render('err',{warning : 'Please paste correct form of link!'})
+}
+
+
+else
 res.render('index')
-
 })
 
 
