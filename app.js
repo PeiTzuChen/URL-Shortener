@@ -32,7 +32,6 @@ const BASE_URL = 'http://localhost:3000/'
 //收到資料
 app.post('/',(req,res) => {
 const originLink = req.body.link
-// console.log('originLink',originLink)
 const findExistLink = (element) =>  element.origin.includes(originLink) //判斷原網址是否存在JASON
 let shortenedLinkForRender = '' //給html render的短網址變數
 const shortenedLinkData = BASE_URL+generateRandom() //產生一組短網址
@@ -41,14 +40,14 @@ if (!originLink.startsWith('http')) {
   res.render('err',{warning : 'Please paste correct form of link!'})
 }
 
-else if (list.some(findExistLink)) {
+else if (list.some(findExistLink)) { //如果已存在資料則產生相同短連結
   const findExistElement = list.filter(element => element.origin === originLink
   )
   shortenedLinkForRender = findExistElement[0].shortened
   res.render('index',{shortenedLinkForRender})
 }
 
-else {  //建立物件儲存原網址與短網址放入list傳入JASON
+else {  //建立物件儲存原網址、短網址與亂碼放入list傳進JASON
   const shortenedLinkObject = {
     origin: originLink,
     shortened: shortenedLinkData,

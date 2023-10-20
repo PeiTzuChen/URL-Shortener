@@ -3,14 +3,11 @@
 
 <h2>Success! Please use this link:</h2>
 <a href={{shortenedLinkForRender}}>{{shortenedLinkForRender}}</a>
-<form action="/" method="post">
+
   <div class="button-copy-block">
-
-      <button class="button-copy" type="submit">Copy</button>
-
+      <button class="button-copy" type="button" id="copy" data-link="{{shortenedLinkForRender}}">Copy</button>
   </div>
 
-</form>
 
 {{else}}
 <form action="/" method="post">

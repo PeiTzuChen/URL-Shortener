@@ -16,5 +16,19 @@
 
 
 </body>
+<script>
+const copyData = document.querySelector('#copy')
+copyData.addEventListener('click',  function onButtonClicked(event)  {
+    navigator.clipboard.writeText(event.target.dataset.link)
+    .then( function () {
+      alert('文本已成功复制到剪贴板');
+    })
+    .catch( function () {
+      alert('复制文本时出现错误:');
+    });
+})
 
+
+
+</script>
 </html>
