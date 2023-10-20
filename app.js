@@ -51,13 +51,22 @@ else if (list.some(findExistLink)) {
 else {  //建立物件儲存原網址與短網址放入list傳入JASON
   const shortenedLinkObject = {
     origin: originLink,
-    shortened: shortenedLinkData
+    shortened: shortenedLinkData,
+    randomString: shortenedLinkData.slice(22,shortenedLinkData.length)
   }
   shortenedLinkForRender = shortenedLinkData
   list.push(shortenedLinkObject)
   fs.writeFileSync('data.json', JSON.stringify(list, null, 2));
   res.render('index',{shortenedLinkForRender})
 }
+})
+
+app.get('/:randomLink', (req,res) => {
+const randomStringData = req.params.randomLink
+const findLinkElement = list.filter(element => element.randomString === randomStringData
+)
+const originLink = findLinkElement[0].origin
+res.redirect(originLink)
 })
 
 app.listen(port, () => {
