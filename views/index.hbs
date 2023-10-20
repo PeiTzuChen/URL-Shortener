@@ -1,10 +1,27 @@
+
+{{#if shortenedLinkForRender}}
+
+<h2>Success! Please use this link:</h2>
+<a href={{shortenedLinkForRender}}>{{shortenedLinkForRender}}</a>
+<form action="/" method="post">
+  <div class="button-copy-block">
+
+      <button class="button-copy" type="submit">Copy</button>
+
+  </div>
+
+</form>
+
+{{else}}
 <form action="/" method="post">
   <div class="input-group">
     <input class="input" type="text" name="link" placeholder="Input URL here">
 
     <div class="button">
-      <button type="submit">Shorten</button>
+      <button class="button-shortened" type="submit">Shorten</button>
     </div>
   </div>
 
 </form>
+
+{{/if}}

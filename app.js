@@ -21,9 +21,9 @@ res.render('index')
 let list = [];
   try {
     list = JSON.parse(fs.readFileSync('data.json', 'utf8'));
-    console.log('list',list)
+    // console.log('list',list)
   } catch (error) {
-    console.log('list沒東西')
+    // console.log('list沒東西')
   }
 
 const generateRandom = require('./js_module/generateRandom.js');
@@ -31,21 +31,32 @@ const BASE_URL = 'http://localhost:3000/'
 
 //收到資料
 app.post('/',(req,res) => {
-const originURL = req.body.link
-console.log('originURL',originURL)
+const originLink = req.body.link
+// console.log('originLink',originLink)
+const findExistLink = (element) =>  element.origin.includes(originLink) //判斷原網址是否存在JASON
+let shortenedLinkForRender = '' //給html render的短網址變數
+const shortenedLinkData = BASE_URL+generateRandom() //產生一組短網址
 
-if (!originURL.startsWith('http')) {
+if (!originLink.startsWith('http')) {
   res.render('err',{warning : 'Please paste correct form of link!'})
 }
 
-else {  //建立物件儲存原網址與短網址
-  const shortenedURL = {
-    origin: originURL,
-    shortened: BASE_URL+generateRandom()
+else if (list.some(findExistLink)) {
+  const findExistElement = list.filter(element => element.origin === originLink
+  )
+  shortenedLinkForRender = findExistElement[0].shortened
+  res.render('index',{shortenedLinkForRender})
+}
+
+else {  //建立物件儲存原網址與短網址放入list傳入JASON
+  const shortenedLinkObject = {
+    origin: originLink,
+    shortened: shortenedLinkData
   }
-  list.push(shortenedURL)
+  shortenedLinkForRender = shortenedLinkData
+  list.push(shortenedLinkObject)
   fs.writeFileSync('data.json', JSON.stringify(list, null, 2));
-  res.render('index')
+  res.render('index',{shortenedLinkForRender})
 }
 })
 
