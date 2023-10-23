@@ -21,9 +21,8 @@ res.render('index')
 let list = [];
   try {
     list = JSON.parse(fs.readFileSync('data.json', 'utf8'));
-    // console.log('list',list)
   } catch (error) {
-    // console.log('list沒東西')
+      console.error("list data can't be used")
   }
 
 const generateRandom = require('./js_module/generateRandom.js');
@@ -36,7 +35,7 @@ const findExistLink = (element) =>  element.origin.includes(originLink) //判斷
 let shortenedLinkForRender = '' //給html render的短網址變數
 const shortenedLinkData = BASE_URL+generateRandom() //產生一組短網址
 
-if (!originLink.startsWith('http')) {
+if (!originLink.startsWith('http')) { //如果沒有輸入內容或是輸入不是網址的內容出現警告
   res.render('err',{warning : 'Please paste correct form of link!'})
 }
 
